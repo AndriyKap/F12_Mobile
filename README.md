@@ -1,6 +1,11 @@
 # ThinkTwice Mobile App
 
-Brief project description here.
+Our team:
+ - Dmytro Hranovskyi
+ - Maria Padalka
+ - Andrii Ishchuk
+ - Olena Hatala
+ - Andrii Kaparys
 
 ## How to Clone This Project
 
