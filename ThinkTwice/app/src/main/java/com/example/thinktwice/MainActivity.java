@@ -34,6 +34,7 @@ private ActivityMainBinding binding;
 
         DatabaseHelper myDB = new DatabaseHelper(MainActivity.this);
         myDB.addTransaction("my title", "my details", "25/03/24", 500, 0, "andrii kaparys", "andrii ishchuk");
+        myDB.addCategory("category title", 0, "22.2", "category type");
 
     }
 
