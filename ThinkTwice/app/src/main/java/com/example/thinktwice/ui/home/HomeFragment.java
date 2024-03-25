@@ -1,5 +1,6 @@
 package com.example.thinktwice.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.thinktwice.MainActivity;
 import com.example.thinktwice.databinding.FragmentHomeBinding;
+import com.example.thinktwice.ui.DatabaseHelper;
 
 public class HomeFragment extends Fragment {
 
@@ -34,9 +37,16 @@ public class HomeFragment extends Fragment {
         // Get a reference to the Button
         Button button = binding.button;
 
-        // Set OnClickListener on the Button
-        button.setOnClickListener(v -> updateText("New Text"));
 
+
+        // Set OnClickListener on the Button
+        //button.setOnClickListener(v -> updateText("New Text"));
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //DatabaseHelper myDB = new DatabaseHelper(MainActivity.this);
+            }
+        });
         return root;
     }
 
