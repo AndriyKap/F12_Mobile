@@ -18,7 +18,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_NAME = "Transactions";
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_TITLE = "title";
-    static final String COLUMN_FROM = "from_category";
+    public static final String COLUMN_FROM = "from_category";
     public static final String COLUMN_TO = "to_category";
     public static final String COLUMN_DETAILS = "details";
     public static final String COLUMN_DATE = "date";
@@ -28,14 +28,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 
-    public static final String CATEGORY_TABLE_NAME = "Category";
+    public static final String CATEGORY_TABLE_NAME = "Categories";
     public static final String CATEGORY_COLUMN_ID = "_id";
     public static final String CATEGORY_COLUMN_TITLE = "title";
     static final String CATEGORY_COLUMN_ISGENERAL = "IsGeneral";
     public static final String CATEGORY_COLUMN_PERCENTAGEAMOUT = "PercentageAmount";
     public static final String CATEGORY_COLUMN_TYPE = "type";
-
-
 
 
     private static final String CREATE_TABLE1 =
@@ -46,15 +44,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     COLUMN_DATE + " TEXT, " +
                     COLUMN_AMOUNT + " INTEGER, " +
                     COLUMN_PLANNED + " INTEGER, " +
-                    COLUMN_TO + " TEXT, " +
-                    COLUMN_FROM + " TEXT);";
+                    COLUMN_FROM + " INTEGER, " +
+                    COLUMN_TO + " INTEGER, " +
+                    "FOREIGN KEY (" + COLUMN_FROM + ") REFERENCES " + CATEGORY_TABLE_NAME + "(" + CATEGORY_COLUMN_ID + "), " +
+                    "FOREIGN KEY (" + COLUMN_TO + ") REFERENCES " + CATEGORY_TABLE_NAME + "(" + CATEGORY_COLUMN_ID + "));";
 
     private static final String CREATE_TABLE2 =
             "CREATE TABLE " + CATEGORY_TABLE_NAME +" ("+ CATEGORY_COLUMN_ID +
                     " INTEGER PRIMARY KEY AUTOINCREMENT, " + CATEGORY_COLUMN_TITLE +
                     " TEXT, " +
                     CATEGORY_COLUMN_ISGENERAL + " INTEGER, " +
-                    CATEGORY_COLUMN_PERCENTAGEAMOUT + " TEXT, " +
+                    CATEGORY_COLUMN_PERCENTAGEAMOUT + " DECIMAL(10, 5), " +
                     CATEGORY_COLUMN_TYPE + " TEXT);";
 
 
@@ -66,19 +66,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        createTransactionsTable(db);
-        createCategoryTable(db);
+        db.execSQL(CREATE_TABLE2);
+        db.execSQL(CREATE_TABLE1);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Drop the first table
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-
         // Drop the second table
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + CATEGORY_TABLE_NAME);
 
-        // Recreate the tables
         onCreate(db);
     }
 
@@ -92,7 +89,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_TABLE2);
     }
 
-    public void addTransaction (String title, String details, String date, int amount, int planned, String to, String from) {
+    public void addTransaction (String title, String details, String date, int amount, int planned, int to_category, int from_category) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -101,8 +98,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_DATE, date);
         cv.put(COLUMN_AMOUNT, amount);
         cv.put(COLUMN_PLANNED, planned);
-        cv.put(COLUMN_TO, to);
-        cv.put(COLUMN_FROM, from);
+        cv.put(COLUMN_TO, to_category);
+        cv.put(COLUMN_FROM, from_category);
 
         long result = db.insert(TABLE_NAME, null, cv);
         if (result == -1) {
@@ -114,7 +111,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public void addCategory (String title, Integer isGeneral, String PercentageAmount, String type) {
+    public void addCategory (String title, Integer isGeneral, Double PercentageAmount, String type) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 

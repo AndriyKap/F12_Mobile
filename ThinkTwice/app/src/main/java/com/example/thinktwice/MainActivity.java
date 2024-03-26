@@ -33,8 +33,8 @@ private ActivityMainBinding binding;
         NavigationUI.setupWithNavController(binding.navView, navController);
 
         DatabaseHelper myDB = new DatabaseHelper(MainActivity.this);
-        myDB.addTransaction("my title", "my details", "25/03/24", 500, 0, "andrii kaparys", "andrii ishchuk");
-        myDB.addCategory("category title", 0, "22.2", "category type");
+        myDB.addTransaction("my title", "my details", "25/03/24", 500, 0, 1, 1);
+        myDB.addCategory("category title", 0, 22.2, "category type");
 
     }
 
