@@ -44,6 +44,9 @@ public class HomeFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AddTransactions.class);
+                startActivity(intent);
+                System.out.println("test");
                 //DatabaseHelper myDB = new DatabaseHelper(MainActivity.this);
             }
         });
