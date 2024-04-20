@@ -32,7 +32,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String CATEGORY_COLUMN_ID = "_id";
     public static final String CATEGORY_COLUMN_TITLE = "title";
     static final String CATEGORY_COLUMN_ISGENERAL = "IsGeneral";
-    public static final String CATEGORY_COLUMN_PERCENTAGEAMOUT = "PercentageAmount";
+    public static final String CATEGORY_COLUMN_PERCENTAGEAMOUNT = "PercentageAmount";
     public static final String CATEGORY_COLUMN_TYPE = "type";
 
 
@@ -54,7 +54,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     " INTEGER PRIMARY KEY AUTOINCREMENT, " + CATEGORY_COLUMN_TITLE +
                     " TEXT, " +
                     CATEGORY_COLUMN_ISGENERAL + " INTEGER, " +
-                    CATEGORY_COLUMN_PERCENTAGEAMOUT + " DECIMAL(10, 5), " +
+                    CATEGORY_COLUMN_PERCENTAGEAMOUNT + " DECIMAL(10, 5), " +
                     CATEGORY_COLUMN_TYPE + " TEXT);";
 
 
@@ -77,16 +77,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + CATEGORY_TABLE_NAME);
 
         onCreate(db);
-    }
-
-
-
-    private void createTransactionsTable(SQLiteDatabase db) {
-        db.execSQL(CREATE_TABLE1);
-    }
-
-    private void createCategoryTable(SQLiteDatabase db) {
-        db.execSQL(CREATE_TABLE2);
     }
 
     public void addTransaction (String title, String details, String date, int amount, int planned, int to_category, int from_category) {
@@ -117,7 +107,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         cv.put(CATEGORY_COLUMN_TITLE, title);
         cv.put(CATEGORY_COLUMN_ISGENERAL, isGeneral);
-        cv.put(CATEGORY_COLUMN_PERCENTAGEAMOUT, PercentageAmount);
+        cv.put(CATEGORY_COLUMN_PERCENTAGEAMOUNT, PercentageAmount);
         cv.put(CATEGORY_COLUMN_TYPE, type);
 
         long result = db.insert(CATEGORY_TABLE_NAME, null, cv);
