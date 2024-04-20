@@ -31,11 +31,6 @@ private ActivityMainBinding binding;
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
-
-        DatabaseHelper myDB = new DatabaseHelper(MainActivity.this);
-        //myDB.addTransaction("my title", "my details", "25/03/24", 500, 0, 1, 1);
-        myDB.addCategory("category title", 0, 22.2, "category type");
-
     }
 
 }
