@@ -18,12 +18,6 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.thinktwice.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
-
-    <fragment
         android:id="@+id/navigation_statistics"
         android:name="com.example.thinktwice.ui.statistics.StatisticsFragment"
         android:label="@string/title_statistics"
