@@ -13,6 +13,9 @@ import android.widget.*;
 import com.example.thinktwice.R;
 import com.example.thinktwice.ui.DatabaseHelper;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class HomeFragment extends Fragment {
 
     private EditText titleInput, toCategoryInput, fromCategoryInput, detailsInput, sumInput;
@@ -60,7 +63,13 @@ public class HomeFragment extends Fragment {
         int day = datePicker.getDayOfMonth();
         int month = datePicker.getMonth() + 1; // Month is 0-based, so add 1
         int year = datePicker.getYear();
-        String dateString = year + "-" + month + "-" + day;
+        Date date = new Date(year - 1900, month - 1, day); // Рік має бути зменшений на 1900, а місяць на 1
+
+        // Встановлюємо бажаний формат дати "yyyy-MM-dd"
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        // Конвертуємо об'єкт Date у рядок з бажаним форматом
+        String dateString = sdf.format(date);
 
 
         int planned = isPlanned.isChecked() ? 1 : 0;
