@@ -7,18 +7,345 @@
     android:layout_height="match_parent"
     tools:context=".ui.dashboard.DashboardFragment" >
 
-    <TextView
-        android:id="@+id/text_dashboard"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
+        android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:id="@+id/topDiv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@android:color/white"
+
+                android:orientation="vertical"
+                android:padding="1dp"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/textBlockHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Головна сторінка"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <GridLayout
+                    android:id="@+id/short_info_grid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30sp"
+                    android:columnCount="8"
+                    android:orientation="horizontal"
+                    android:rowCount="3"
+                    app:layout_constraintTop_toBottomOf="@+id/textBlockHeading">
+
+                    <ImageView
+                        android:id="@+id/gr_dollar"
+                        android:layout_row="0"
+                        android:layout_rowWeight="1"
+                        android:layout_column="0"
+                        android:layout_columnSpan="1"
+                        android:layout_columnWeight="1"
+                        android:src="@drawable/green_dollar" />
+
+                    <TextView
+                        android:layout_row="0"
+                        android:layout_rowWeight="1"
+                        android:layout_column="1"
+                        android:layout_columnSpan="1"
+                        android:layout_columnWeight="30"
+                        android:text=""
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/bl_dollar"
+                        android:layout_row="0"
+                        android:layout_rowWeight="1"
+                        android:layout_column="2"
+                        android:layout_columnSpan="1"
+                        android:layout_columnWeight="1"
+                        android:src="@drawable/blue_dollar" />
+
+                    <TextView
+                        android:layout_row="0"
+                        android:layout_rowWeight="1"
+                        android:layout_column="3"
+                        android:layout_columnSpan="1"
+                        android:layout_columnWeight="30"
+                        android:text=""
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/r_dollar"
+                        android:layout_row="0"
+                        android:layout_rowWeight="1"
+                        android:layout_column="4"
+                        android:layout_columnSpan="1"
+                        android:layout_columnWeight="1"
+                        android:src="@drawable/red_dollar" />
+
+                    <TextView
+                        android:layout_row="0"
+                        android:layout_rowWeight="1"
+                        android:layout_column="5"
+                        android:layout_columnSpan="1"
+                        android:layout_columnWeight="30"
+                        android:text=""
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/v_dollar"
+                        android:layout_row="0"
+                        android:layout_rowWeight="1"
+                        android:layout_column="6"
+                        android:layout_columnSpan="1"
+                        android:layout_columnWeight="1"
+                        android:src="@drawable/violet_dollar" />
+
+                    <TextView
+                        android:layout_row="0"
+                        android:layout_rowWeight="1"
+                        android:layout_column="7"
+                        android:layout_columnSpan="1"
+                        android:layout_columnWeight="30"
+                        android:text=""
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/balance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="1"
+                        android:layout_rowWeight="1"
+                        android:layout_column="0"
+                        android:layout_columnSpan="2"
+                        android:layout_columnWeight="2"
+                        android:text="0грн"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/income"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="1"
+                        android:layout_rowWeight="1"
+                        android:layout_column="2"
+                        android:layout_columnSpan="2"
+                        android:layout_columnWeight="2"
+                        android:text="0грн"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/expenses"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="1"
+                        android:layout_rowWeight="1"
+                        android:layout_column="4"
+                        android:layout_columnSpan="2"
+                        android:layout_columnWeight="2"
+                        android:text="0грн"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/savings"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="1"
+                        android:layout_rowWeight="1"
+                        android:layout_column="6"
+                        android:layout_columnSpan="2"
+                        android:layout_columnWeight="2"
+                        android:text="0грн"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/balance_label"
+                        android:layout_row="2"
+                        android:layout_rowWeight="1"
+                        android:layout_column="0"
+                        android:layout_columnSpan="2"
+                        android:layout_columnWeight="1"
+                        android:text="Баланс"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/income_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="2"
+                        android:layout_rowWeight="1"
+                        android:layout_column="2"
+                        android:layout_columnSpan="2"
+                        android:layout_columnWeight="1"
+                        android:text="Дохід"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/expences_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="2"
+                        android:layout_rowWeight="1"
+                        android:layout_column="4"
+                        android:layout_columnSpan="2"
+                        android:layout_columnWeight="1"
+                        android:text="Витрати"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/savings_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_row="2"
+                        android:layout_rowWeight="1"
+                        android:layout_column="6"
+                        android:layout_columnSpan="2"
+                        android:layout_columnWeight="1"
+                        android:text="Збереження"
+                        android:textSize="18sp" />
+
+                </GridLayout>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/middleDiv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@android:color/white"
+
+                android:orientation="vertical"
+                android:padding="1dp"
+                app:layout_constraintTop_toBottomOf="@id/topDiv">
+
+                <TextView
+                    android:id="@+id/textBlockFinance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Фінанси"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="4dp"
+                    app:layout_constraintTop_toBottomOf="@+id/textBlockFinance">
+
+                    <com.github.mikephil.charting.charts.LineChart
+                        android:id="@+id/lineChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp" />
+                </androidx.cardview.widget.CardView>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/bottomDiv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:background="@android:color/white"
+                android:layout_marginBottom="350dp"
+
+                android:orientation="vertical"
+                android:padding="1dp"
+                app:layout_constraintTop_toBottomOf="@id/middleDiv">
+
+                <TextView
+                    android:id="@+id/textBlockTransactions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Транзакції"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/textBlockTransactions"
+                        >
+                            <TableLayout
+                                android:id="@+id/transactionsTable"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="10dp"
+                                android:divider="@drawable/table_divider"
+                                android:showDividers="middle"
+                                android:stretchColumns="*">
+
+                            <!-- Заголовок таблиці -->
+                                <TableRow>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Деталі"
+                                        android:paddingLeft="5dp"
+                                        android:paddingRight="5dp"
+                                        android:textStyle="bold" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Дата"
+                                        android:paddingLeft="5dp"
+                                        android:paddingRight="5dp"
+                                        android:textStyle="bold" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Сума"
+                                        android:paddingLeft="5dp"
+                                        android:paddingRight="5dp"
+                                        android:textStyle="bold" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Звідки"
+                                        android:paddingLeft="5dp"
+                                        android:paddingRight="5dp"
+                                        android:textStyle="bold" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Куди"
+                                        android:paddingLeft="5dp"
+                                        android:paddingRight="5dp"
+                                        android:textStyle="bold" />
+                                </TableRow>
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="@android:color/darker_gray"
+                                    android:layout_margin="4dp" />
+                            </TableLayout>
+                    </ScrollView>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_height="50dp"
+                android:layout_width="match_parent">
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
