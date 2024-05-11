@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.home.HomeFragment" >
+
+    <LinearLayout
+        android:layout_width="370dp"
+        android:layout_height="260dp"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteY="392dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="41dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50px"
+            android:layout_weight="1"
+            android:text="Нова транзакція"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="103dp"
+            tools:layout_editor_absoluteY="16dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/fromCategory_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Звідки"
+                android:inputType="text"
+                tools:layout_editor_absoluteX="88dp"
+                tools:layout_editor_absoluteY="191dp" />
+
+            <EditText
+                android:id="@+id/toCategory_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Куди"
+                android:inputType="text"
+                tools:layout_editor_absoluteX="88dp"
+                tools:layout_editor_absoluteY="191dp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/details_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:hint="Деталі"
+                android:inputType="text"
+                tools:layout_editor_absoluteX="88dp"
+                tools:layout_editor_absoluteY="87dp" />
+
+            <EditText
+                android:id="@+id/sum_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:hint="Сума"
+                android:inputType="number"
+                tools:layout_editor_absoluteX="88dp"
+                tools:layout_editor_absoluteY="87dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/scheduleCheckBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="23px"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:text="Запланувати" />
+
+            <EditText
+                android:id="@+id/data_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:hint="Сума"
+                android:inputType="number"
+                tools:layout_editor_absoluteX="88dp"
+                tools:layout_editor_absoluteY="87dp" />
+
+
+            <!--            <DatePicker-->
+            <!--                android:id="@+id/datePicker"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_weight="1"-->
+            <!--                android:calendarTextColor="@color/black"-->
+            <!--                android:visibility="visible"/>-->
+        </LinearLayout>
+
+
+        <!--        <Button-->
+        <!--            android:id="@+id/close_create_transaction_button"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_margin="6dp"-->
+        <!--            android:layout_marginStart="10dp"-->
+        <!--            android:layout_marginEnd="10dp"-->
+
+        <!--            android:backgroundTint="@color/black"-->
+        <!--            android:padding="12dp"-->
+        <!--            android:text="Закрити"-->
+        <!--            android:textAlignment="center"-->
+        <!--            android:textAllCaps="false"-->
+        <!--            android:textColor="#FFFFFF"-->
+        <!--            android:textSize="11sp"-->
+        <!--            android:textStyle="bold"-->
+        <!--            tools:layout_editor_absoluteX="63dp"-->
+
+        <!--            tools:layout_editor_absoluteY="407dp" />-->
+
+        <Button
+            android:id="@+id/create_transaction_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="6dp"
+
+            android:backgroundTint="@color/black"
+            android:padding="12dp"
+            android:text="Додати"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="63dp"
+            tools:layout_editor_absoluteY="407dp" />
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
