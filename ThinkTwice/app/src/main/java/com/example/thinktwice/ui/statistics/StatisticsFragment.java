@@ -3,6 +3,7 @@ package com.example.thinktwice.ui.statistics;
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +31,7 @@ import com.github.mikephil.charting.data.BarEntry;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
@@ -38,6 +40,8 @@ import com.github.mikephil.charting.formatter.ValueFormatter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Map;
+
 import com.example.thinktwice.ui.DatabaseHelper;
 
 public class StatisticsFragment extends Fragment {
@@ -140,10 +144,10 @@ public class StatisticsFragment extends Fragment {
         // Отримати початкову та кінцеву дати для останнього тижня
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_MONTH, -6); // Початкова дата - 6 днів назад (бо враховуємо і сьогодні)
-        String startDate = new SimpleDateFormat("yyyy-M-d", Locale.getDefault()).format(calendar.getTime());
+        String startDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.getTime());
 
         Calendar endDateCalendar = Calendar.getInstance();
-        String endDate = new SimpleDateFormat("yyyy-M-d", Locale.getDefault()).format(endDateCalendar.getTime());
+        String endDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(endDateCalendar.getTime());
 
         // Складаємо запит SQL для отримання доходів за останній тиждень
         String query = "SELECT " + dbHelper.COLUMN_DATE + ", SUM(" + dbHelper.COLUMN_AMOUNT + ") AS total_income" +
@@ -156,20 +160,39 @@ public class StatisticsFragment extends Fragment {
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery(query, null);
+        Log.d("SQL_QUERY", query);
 
         float barDistance = 0.15f;
-        if (cursor.moveToFirst()) {
+        if (cursor != null && cursor.moveToFirst()) {
             do {
                 float income = cursor.getFloat(cursor.getColumnIndex("total_income"));
                 String dateString = cursor.getString(cursor.getColumnIndex(dbHelper.COLUMN_DATE));
                 // Отримати день з дати
                 int day = getDayFromDate(dateString); // Потрібно реалізувати метод getDayFromDate()
-                incomeEntries.add(new BarEntry(day - barDistance, income));
+
+                Calendar calendar1 = Calendar.getInstance(); // Отримання поточної дати
+                int currentDay = calendar1.get(Calendar.DAY_OF_MONTH); // Отримання числа поточного дня
+                calendar1.add(Calendar.DAY_OF_MONTH, -6);
+                int sevenDaysAgo = calendar1.get(Calendar.DAY_OF_MONTH);
+
+                List<Integer> sequence = new ArrayList<>();
+                for (int i = sevenDaysAgo; i <= currentDay; i++) {
+                    sequence.add(i);
+                }
+
+                Map<Integer, Integer> indexedSequence = new HashMap<>();
+                for (int i = sevenDaysAgo; i <= currentDay; i++) {
+                    indexedSequence.put(i, i - sevenDaysAgo);
+                }
+
+                int indexDay = indexedSequence.get(day);
+
+                incomeEntries.add(new BarEntry(indexDay - barDistance, income));
             } while (cursor.moveToNext());
         }
 
         Calendar calendarStart = Calendar.getInstance();
-        calendarStart.add(Calendar.DAY_OF_MONTH, -6); // Початкова дата - 6 днів назад (бо враховуємо і сьогодні)
+        calendarStart.add(Calendar.DAY_OF_MONTH, -6);
 
         int dayCount = 0;
         // Додати нульові значення для днів, коли немає записів
@@ -190,10 +213,10 @@ public class StatisticsFragment extends Fragment {
         // Отримати початкову та кінцеву дати для останнього тижня
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_MONTH, -6); // Початкова дата - 6 днів назад (бо враховуємо і сьогодні)
-        String startDate = new SimpleDateFormat("yyyy-M-d", Locale.getDefault()).format(calendar.getTime());
+        String startDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.getTime());
 
         Calendar endDateCalendar = Calendar.getInstance();
-        String endDate = new SimpleDateFormat("yyyy-M-d", Locale.getDefault()).format(endDateCalendar.getTime());
+        String endDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(endDateCalendar.getTime());
 
         // Складаємо запит SQL для отримання доходів за останній тиждень
         String query = "SELECT " + dbHelper.COLUMN_DATE + ", SUM(" + dbHelper.COLUMN_AMOUNT + ") AS total_expenses" +
@@ -213,7 +236,24 @@ public class StatisticsFragment extends Fragment {
                 String dateString = cursor.getString(cursor.getColumnIndex(dbHelper.COLUMN_DATE));
                 // Отримати день з дати
                 int day = getDayFromDate(dateString); // Потрібно реалізувати метод getDayFromDate()
-                expensesEntries.add(new BarEntry(day + barDistance, income));
+                Calendar calendar2 = Calendar.getInstance(); // Отримання поточної дати
+                int currentDay = calendar2.get(Calendar.DAY_OF_MONTH); // Отримання числа поточного дня
+                calendar2.add(Calendar.DAY_OF_MONTH, -6);
+                int sevenDaysAgo = calendar2.get(Calendar.DAY_OF_MONTH);
+
+                List<Integer> sequence = new ArrayList<>();
+                for (int i = sevenDaysAgo; i <= currentDay; i++) {
+                    sequence.add(i);
+                }
+
+                Map<Integer, Integer> indexedSequence = new HashMap<>();
+                for (int i = sevenDaysAgo; i <= currentDay; i++) {
+                    indexedSequence.put(i, i - sevenDaysAgo);
+                }
+
+                int indexDay = indexedSequence.get(day);
+
+                expensesEntries.add(new BarEntry(indexDay + barDistance, income));
             } while (cursor.moveToNext());
         }
 
@@ -276,24 +316,35 @@ public class StatisticsFragment extends Fragment {
 
     private void addDataToPieChart(PieChart pieChart, List<CategoryData> categoryDataList) {
         ArrayList<PieEntry> entries = new ArrayList<>();
+        double totalPercentage = 0.0;
 
         for (CategoryData categoryData : categoryDataList) {
-            double percentageAmount = categoryData.getPercentageAmount() * 100; // переведення відсотків
-            entries.add(new PieEntry((float) percentageAmount, categoryData.getTitle()));
+            double percentageAmount = categoryData.getPercentageAmount();
+            totalPercentage += percentageAmount;
+            entries.add(new PieEntry((float) (percentageAmount * 100), categoryData.getTitle()));
+        }
+
+        // Перевірка, чи сума відсотків менше 1
+        if (totalPercentage < 1.0) {
+            double remainingPercentage = 1.0 - totalPercentage;
+            entries.add(new PieEntry((float) (remainingPercentage * 100), "Невикористані витрати"));
         }
 
         PieDataSet dataSet = new PieDataSet(entries, "Category Data");
         dataSet.setSliceSpace(3f);
         dataSet.setSelectionShift(5f);
-        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+        dataSet.setValueTextColor(Color.BLACK);
 
         PieData data = new PieData(dataSet);
         data.setValueTextSize(10f);
-        data.setValueTextColor(Color.WHITE);
+        data.setValueTextColor(Color.BLACK);
 
         pieChart.setData(data);
+        pieChart.setEntryLabelColor(Color.BLACK);
         pieChart.invalidate();
     }
+
 
 
     private static class CategoryData {
