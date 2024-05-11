@@ -316,24 +316,35 @@ public class StatisticsFragment extends Fragment {
 
     private void addDataToPieChart(PieChart pieChart, List<CategoryData> categoryDataList) {
         ArrayList<PieEntry> entries = new ArrayList<>();
+        double totalPercentage = 0.0;
 
         for (CategoryData categoryData : categoryDataList) {
-            double percentageAmount = categoryData.getPercentageAmount() * 100; // переведення відсотків
-            entries.add(new PieEntry((float) percentageAmount, categoryData.getTitle()));
+            double percentageAmount = categoryData.getPercentageAmount();
+            totalPercentage += percentageAmount;
+            entries.add(new PieEntry((float) (percentageAmount * 100), categoryData.getTitle()));
+        }
+
+        // Перевірка, чи сума відсотків менше 1
+        if (totalPercentage < 1.0) {
+            double remainingPercentage = 1.0 - totalPercentage;
+            entries.add(new PieEntry((float) (remainingPercentage * 100), "Невикористані витрати"));
         }
 
         PieDataSet dataSet = new PieDataSet(entries, "Category Data");
         dataSet.setSliceSpace(3f);
         dataSet.setSelectionShift(5f);
-        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+        dataSet.setValueTextColor(Color.BLACK);
 
         PieData data = new PieData(dataSet);
         data.setValueTextSize(10f);
-        data.setValueTextColor(Color.WHITE);
+        data.setValueTextColor(Color.BLACK);
 
         pieChart.setData(data);
+        pieChart.setEntryLabelColor(Color.BLACK);
         pieChart.invalidate();
     }
+
 
 
     private static class CategoryData {
