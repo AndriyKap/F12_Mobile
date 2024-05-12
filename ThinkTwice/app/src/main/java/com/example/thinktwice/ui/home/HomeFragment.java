@@ -1,6 +1,10 @@
 package com.example.thinktwice.ui.home;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,80 +15,129 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import android.widget.*;
 import com.example.thinktwice.R;
+import com.example.thinktwice.databinding.FragmentHomeBinding;
 import com.example.thinktwice.ui.DatabaseHelper;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.io.Console;
 
 public class HomeFragment extends Fragment {
-
-    private EditText titleInput, toCategoryInput, fromCategoryInput, detailsInput, sumInput;
-    private Button addButton;
-
-    private CheckBox isPlanned;
-    private DatePicker datePicker;
-    private DatabaseHelper databaseHelper;
+    private DatabaseHelper dbHelper;
+    private FragmentHomeBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
+        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        View root = binding.getRoot();
+        dbHelper = new DatabaseHelper(requireContext());
 
-        datePicker = root.findViewById(R.id.datePicker);
-        titleInput = root.findViewById(R.id.title_input);
-        toCategoryInput = root.findViewById(R.id.toCategory_input);
-        fromCategoryInput = root.findViewById(R.id.fromCategory_input);
-        detailsInput = root.findViewById(R.id.details_input);
-        isPlanned = root.findViewById(R.id.scheduleCheckBox);
-        sumInput = root.findViewById(R.id.sum_input);
-        addButton = root.findViewById(R.id.add_button);
 
-        databaseHelper = new DatabaseHelper(getContext());
-
-        addButton.setOnClickListener(new View.OnClickListener() {
+        Button openModalTransactionButton = root.findViewById(R.id.open_modal_transaction_button);
+        openModalTransactionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addTransactionToDatabase();
+                CreateTransactionDialog dialogFragment = new CreateTransactionDialog();
+                dialogFragment.show(getParentFragmentManager(), "AddTransactionDialogFragment");
             }
         });
+
+        Button openModalCategories = root.findViewById(R.id.open_category_button);
+        openModalCategories.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CategoriesDialogFragment categoriesDialogFragment = new CategoriesDialogFragment();
+                categoriesDialogFragment.show(getParentFragmentManager(), "CategoriesDialogFragment");
+            }
+        });
+
+        displayPlannedTransactions();
+        displayTransactions();
 
         return root;
     }
 
-    private void addTransactionToDatabase() {
-        String title = titleInput.getText().toString().trim();
-        Integer toCategory = Integer.parseInt(toCategoryInput.getText().toString().trim());
-        Integer fromCategory = Integer.parseInt(fromCategoryInput.getText().toString().trim());
-        String details = detailsInput.getText().toString().trim();
-        String sumString = sumInput.getText().toString().trim();
+    private void displayPlannedTransactions()
+    {
+        String query = "SELECT * FROM " + dbHelper.TABLE_NAME + " WHERE " + dbHelper.COLUMN_PLANNED + " = 1;";
 
-        // Convert sumString to integer or handle it accordingly based on your requirements
-        int sum = Integer.parseInt(sumString);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        if (cursor != null) {
+            View root = binding.getRoot();
+            TableLayout plannedTransactionsTable = root.findViewById(R.id.plannedTransactionsTable);
 
-        int day = datePicker.getDayOfMonth();
-        int month = datePicker.getMonth() + 1; // Month is 0-based, so add 1
-        int year = datePicker.getYear();
-        Date date = new Date(year - 1900, month - 1, day); // Рік має бути зменшений на 1900, а місяць на 1
+            while (cursor.moveToNext()) {
+                // Отримати дані про транзакцію
+                String details = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_DETAILS));
+                String date = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_DATE));
+                int amount = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.COLUMN_AMOUNT));
+                int fromCategoryId = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.COLUMN_FROM));
+                int toCategoryId = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.COLUMN_TO));
 
-        // Встановлюємо бажаний формат дати "yyyy-MM-dd"
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                // Отримати назви категорій from та to
+                String fromCategoryName = dbHelper.getCategoryName(String.valueOf(fromCategoryId));
+                String toCategoryName = dbHelper.getCategoryName(String.valueOf(toCategoryId));
 
-        // Конвертуємо об'єкт Date у рядок з бажаним форматом
-        String dateString = sdf.format(date);
+                // Створити новий TableRow
+                TableRow newRow = new TableRow(requireContext());
 
+                // Додати TextView для кожного поля в транзакції
+                addTextViewToTableRow(newRow, fromCategoryName);
+                addTextViewToTableRow(newRow, toCategoryName);
+                addTextViewToTableRow(newRow, details);
+                addTextViewToTableRow(newRow, date);
+                addTextViewToTableRow(newRow, String.valueOf(amount));
 
-        int planned = isPlanned.isChecked() ? 1 : 0;
-        // You may want to perform some validation here before adding to the database
-
-        // Add the transaction to the database
-        databaseHelper.addTransaction(title, details, dateString, sum, planned, toCategory, fromCategory);
-        // Replace the hardcoded values above with appropriate values based on your requirements
-
-        // Clear EditText fields after adding the transaction
-        toCategoryInput.setText("");
-        fromCategoryInput.setText("");
-        detailsInput.setText("");
-        sumInput.setText("");
-
-        isPlanned.setChecked(false);
+                // Додати TableRow до TableLayout
+                plannedTransactionsTable.addView(newRow);
+            }
+            cursor.close();
+        }
     }
+
+    private void displayTransactions() {
+        // Отримати всі транзакції
+        Cursor cursor = dbHelper.getAllTransactions();
+        View root = binding.getRoot();
+        TableLayout transactionsTable = root.findViewById(R.id.transactionsTable);
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                // Отримати дані про транзакцію
+                String details = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_DETAILS));
+                String date = cursor.getString(cursor.getColumnIndex(DatabaseHelper.COLUMN_DATE));
+                int amount = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.COLUMN_AMOUNT));
+                int fromCategoryId = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.COLUMN_FROM));
+                int toCategoryId = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.COLUMN_TO));
+
+                // Отримати назви категорій from та to
+                String fromCategoryName = dbHelper.getCategoryName(String.valueOf(fromCategoryId));
+                String toCategoryName = dbHelper.getCategoryName(String.valueOf(toCategoryId));
+
+                // Створити новий TableRow
+                TableRow newRow = new TableRow(requireContext());
+
+                // Додати TextView для кожного поля в транзакції
+                addTextViewToTableRow(newRow, fromCategoryName);
+                addTextViewToTableRow(newRow, toCategoryName);
+                addTextViewToTableRow(newRow, details);
+                addTextViewToTableRow(newRow, date);
+                addTextViewToTableRow(newRow, String.valueOf(amount));
+
+                // Додати TableRow до TableLayout
+                transactionsTable.addView(newRow);
+            }
+            cursor.close();
+        }
+    }
+
+    private void addTextViewToTableRow(TableRow row, String text) {
+        TextView textView = new TextView(requireContext());
+        textView.setText(text);
+        textView.setMaxLines(1);
+        textView.setTextSize(10);
+        textView.setTextColor(Color.GRAY);
+        textView.setPadding(3, 0, 3, 0);
+        textView.setGravity(Gravity.CENTER);
+        row.addView(textView);
+    }
+
 }
