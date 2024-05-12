@@ -2,8 +2,10 @@ package com.example.thinktwice.ui;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.view.SurfaceControl;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -118,4 +120,34 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Toast.makeText(context, "Added successfuly!", Toast.LENGTH_SHORT).show();
         }
     }
+
+    public Cursor getAllTransactions() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.query(TABLE_NAME, null, null, null, null, null, null);
+    }
+
+    public String getCategoryType(String categoryId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String type = null;
+        Cursor cursor = db.rawQuery("SELECT " + CATEGORY_COLUMN_TYPE + " FROM " + CATEGORY_TABLE_NAME + " WHERE " + CATEGORY_COLUMN_ID + " = ?", new String[]{categoryId});
+        if (cursor.moveToFirst()) {
+            type = cursor.getString(0);
+        }
+        cursor.close();
+        return type;
+    }
+
+    public String getCategoryName(String categoryId) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String name = null;
+        Cursor cursor = db.rawQuery("SELECT " + CATEGORY_COLUMN_TITLE + " FROM " + CATEGORY_TABLE_NAME + " WHERE " + CATEGORY_COLUMN_ID + " = ?", new String[]{categoryId});
+        if (cursor.moveToFirst()) {
+            name = cursor.getString(0);
+        }
+        cursor.close();
+        return name;
+    }
+
+
+
 }

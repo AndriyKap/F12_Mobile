@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -38,7 +39,6 @@ public class CategoriesDialogFragment extends DialogFragment {
     private EditText categoryNameInput, percentageAmountInput;
     private Spinner categoryTypeSpinner;
     private Button createCategoryButton;
-
     private static class CategoryData {
         private int id;
         private String title;
