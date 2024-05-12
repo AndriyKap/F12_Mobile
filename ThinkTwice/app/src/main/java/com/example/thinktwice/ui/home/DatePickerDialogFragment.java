@@ -17,23 +17,10 @@ import com.example.thinktwice.R;
 
 public class DatePickerDialogFragment extends DialogFragment {
 
-//    private DatePickerDialogViewModel mViewModel;
-
-//    public static DatePickerDialogFragment newInstance() {
-//        return new DatePickerDialogFragment();
-//    }
-
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_date_picker_dialog, container, false);
     }
-
-//    @Override
-//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-//        super.onActivityCreated(savedInstanceState);
-//        mViewModel = new ViewModelProvider(this).get(DatePickerDialogViewModel.class);
-//        // TODO: Use the ViewModel
-//    }
 
 }

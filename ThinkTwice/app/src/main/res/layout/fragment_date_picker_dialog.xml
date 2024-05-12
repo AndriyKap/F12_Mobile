@@ -19,6 +19,7 @@ tools:context=".ui.home.HomeFragment" >
         android:layout_weight="1"
         android:calendarTextColor="@color/black"
         android:visibility="visible"/>
+
 </LinearLayout>
 
 
