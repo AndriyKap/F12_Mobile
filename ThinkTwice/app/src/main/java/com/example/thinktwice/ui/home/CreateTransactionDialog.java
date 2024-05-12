@@ -3,6 +3,7 @@ package com.example.thinktwice.ui.home;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.DatePickerDialog;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -43,7 +44,24 @@ public class CreateTransactionDialog extends DialogFragment {
     private CheckBox isPlanned;
     private DatePicker datePicker;
     private DatabaseHelper databaseHelper;
+    private int selectedYear;
+    private int selectedMonth;
+    private int selectedDay;
+    private DatePickerDialogFragment datePickerDialogFragment;
 
+    // Отримувач події вибору дати
+    private DatePickerDialogFragment.OnDateSetListener mDateSetListener = new DatePickerDialogFragment.OnDateSetListener() {
+        @Override
+        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+            // Оновлення вибраної дати
+            selectedYear = year;
+            selectedMonth = month;
+            selectedDay = dayOfMonth;
+
+            // Відобразити вибрану дату у TextView
+            dataTextView.setText(String.format(Locale.getDefault(), "%d-%02d-%02d", selectedYear, selectedMonth + 1, selectedDay));
+        }
+    };
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -52,6 +70,7 @@ public class CreateTransactionDialog extends DialogFragment {
         databaseHelper = new DatabaseHelper(requireContext());
 
         View view = inflater.inflate(R.layout.fragment_create_transaction_dialog, container, false);
+        View viewDate = inflater.inflate(R.layout.fragment_date_picker_dialog, container, false);
         View dataPickerFragment = inflater.inflate(R.layout.fragment_date_picker_dialog, container, false);
 
         datePicker = dataPickerFragment.findViewById(R.id.datePicker);
@@ -100,12 +119,20 @@ public class CreateTransactionDialog extends DialogFragment {
 
         isPlanned.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                DatePickerDialogFragment datePickerDialogFragment = new DatePickerDialogFragment();
+                datePickerDialogFragment = new DatePickerDialogFragment();
+                datePickerDialogFragment.setOnDateSetListener((pickerView, year, month, dayOfMonth) -> {
+                    // Оновлення вибраної дати
+                    selectedYear = year;
+                    selectedMonth = month;
+                    selectedDay = dayOfMonth;
+
+                    // Відобразити вибрану дату у TextView
+                    dataTextView.setText(String.format(Locale.getDefault(), "%d-%02d-%02d", selectedYear, selectedMonth + 1, selectedDay));
+                });
                 datePickerDialogFragment.show(getParentFragmentManager(), "DatePickerDialogFragment");
 
                 dataTextView.setVisibility(View.GONE);
-            }
-            else {
+            } else {
                 dataTextView.setVisibility(View.GONE);
             }
         });
@@ -168,10 +195,7 @@ public class CreateTransactionDialog extends DialogFragment {
 
         int sum = Integer.parseInt(sumString);
 
-        int day = datePicker.getDayOfMonth();
-        int month = datePicker.getMonth() + 1; // Month is 0-based, so add 1
-        int year = datePicker.getYear();
-        String dateString = year + "-" + month + "-" + day;
+        String dateString = String.format(Locale.getDefault(), "%d-%02d-%02d", selectedYear, selectedMonth + 1, selectedDay);
 
         int planned = isPlanned.isChecked() ? 1 : 0;
 
