@@ -20,11 +20,21 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/textBlockHeading"
+                android:layout_width="280dp"
+                android:layout_height="49dp"
+                android:layout_marginTop="3dp"
+                android:text="Головна сторінка"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="26sp"
+                android:textStyle="bold" />
 
             <RelativeLayout
                 android:id="@+id/topDiv"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="149dp"
                 android:layout_margin="16dp"
                 android:background="@android:color/white"
 
@@ -32,14 +42,17 @@
                 android:padding="1dp"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/textBlockHeading"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Головна сторінка"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"/>
+
+                <!--                <TextView-->
+                <!--                    android:id="@+id/text_transaction_title"-->
+                <!--                    android:layout_width="203dp"-->
+                <!--                    android:layout_height="203dp"-->
+                <!--                    android:layout_marginTop="3dp"-->
+                <!--                    android:text="Транзакції"-->
+                <!--                    android:textAlignment="center"-->
+                <!--                    android:textSize="26sp"-->
+                <!--                    android:textColor="#000000"-->
+                <!--                    android:textStyle="bold" />-->
 
                 <GridLayout
                     android:id="@+id/short_info_grid"
@@ -67,8 +80,7 @@
                         android:layout_columnSpan="1"
                         android:layout_columnWeight="30"
                         android:text=""
-                        android:textStyle="bold"
-                        />
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/bl_dollar"
@@ -135,9 +147,9 @@
                         android:layout_columnSpan="2"
                         android:layout_columnWeight="2"
                         android:text="0грн"
+                        android:textColor="@color/black"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/income"
@@ -149,9 +161,9 @@
                         android:layout_columnSpan="2"
                         android:layout_columnWeight="2"
                         android:text="0грн"
+                        android:textColor="@color/black"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/expenses"
@@ -163,9 +175,9 @@
                         android:layout_columnSpan="2"
                         android:layout_columnWeight="2"
                         android:text="0грн"
+                        android:textColor="@color/black"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/savings"
@@ -177,9 +189,9 @@
                         android:layout_columnSpan="2"
                         android:layout_columnWeight="2"
                         android:text="0грн"
+                        android:textColor="@color/black"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"/>
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/balance_label"
@@ -189,8 +201,8 @@
                         android:layout_columnSpan="2"
                         android:layout_columnWeight="1"
                         android:text="Баланс"
-                        android:textSize="18sp"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/income_label"
@@ -202,8 +214,8 @@
                         android:layout_columnSpan="2"
                         android:layout_columnWeight="1"
                         android:text="Дохід"
-                        android:textSize="18sp"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/expences_label"
@@ -215,8 +227,8 @@
                         android:layout_columnSpan="2"
                         android:layout_columnWeight="1"
                         android:text="Витрати"
-                        android:textSize="18sp"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/savings_label"
@@ -228,8 +240,8 @@
                         android:layout_columnSpan="2"
                         android:layout_columnWeight="1"
                         android:text="Збереження"
-                        android:textSize="18sp"
-                        android:textColor="@color/black"/>
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
 
                 </GridLayout>
 
