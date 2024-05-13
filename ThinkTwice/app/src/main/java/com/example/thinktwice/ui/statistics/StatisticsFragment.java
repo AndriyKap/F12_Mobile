@@ -2,6 +2,7 @@ package com.example.thinktwice.ui.statistics;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.example.thinktwice.ui.dashboard.DashboardViewModel;
 import com.github.mikephil.charting.charts.BarChart;
@@ -115,8 +117,68 @@ public class StatisticsFragment extends Fragment {
         // Додавання даних до pie chart
         addDataToPieChart(pieChart, categoryDataList);
 
+
+
+        // Inside onCreateView() method
+// Add these lines after setting up the first bar chart (barChart)
+
+// Set up the second bar chart (barChart2)
+        BarChart barChart2 = binding.barChart2;
+        setupBarChart(barChart2);
+
+// Retrieve category data from the database
+        List<CategoryData> categoryDataList2 = getCategoryDataFromDatabase();
+
+// Create bar entries for each category
+        List<BarEntry> categoryEntries = getCategoryExpensesDataFromDatabase(categoryDataList2);
+
+// Create a dataset for category expenses
+        BarDataSet categoryDataSet = new BarDataSet(categoryEntries, "Category Expenses");
+        categoryDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+
+        //////
+        XAxis xAxiss = binding.barChart2.getXAxis();
+        xAxiss.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxiss.setDrawAxisLine(true);
+        xAxiss.setDrawGridLines(false);
+        xAxiss.setTextSize(10f);
+        xAxiss.setTypeface(Typeface.DEFAULT_BOLD);
+
+        xAxiss.setGranularity(1f);
+
+        // Add labels for the bars
+        List<String> barLabels = new ArrayList<>();
+        //List<String> okay = getCategoryNamesFromDatabase();
+        barLabels.add("");
+        for (int i = 0; i < 4; i++) {
+            barLabels.add("Category");
+        }
+
+        // Convert the list to an array
+        final String[] barLabelsA = barLabels.toArray(new String[0]);
+
+
+
+        // Set the custom labels for the X-axis
+        xAxiss.setValueFormatter(new IndexAxisValueFormatter(barLabelsA));
+
+
+        /////
+
+// Configure the legend
+        Legend categoryLegend = barChart2.getLegend();
+        categoryLegend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+
+// Create BarData and set it to the bar chart
+        BarData categoryBarData = new BarData(categoryDataSet);
+        barChart2.setData(categoryBarData);
+        barChart2.getDescription().setEnabled(false);
+        barChart2.invalidate();
+
         return root;
     }
+
+
 
     @Override
     public void onDestroyView() {
@@ -206,6 +268,80 @@ public class StatisticsFragment extends Fragment {
         return incomeEntries;
     }
 
+    private List<String> getCategoryNamesFromDatabase() {
+        List<String> categoryNames = new ArrayList<>();
+
+        List<BarEntry> incomeEntries = new ArrayList<>();
+
+        // Отримати початкову та кінцеву дати для останнього тижня
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_MONTH, -6); // Початкова дата - 6 днів назад (бо враховуємо і сьогодні)
+        String startDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.getTime());
+
+        Calendar endDateCalendar = Calendar.getInstance();
+        String endDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(endDateCalendar.getTime());
+
+        // Складаємо запит SQL для отримання доходів за останній тиждень
+        String query = "SELECT " + dbHelper.COLUMN_DATE + ", " + dbHelper.CATEGORY_COLUMN_TITLE + ", SUM(" + dbHelper.COLUMN_AMOUNT + ") AS total_income" +
+                " FROM " + dbHelper.TABLE_NAME +
+                " INNER JOIN " + dbHelper.CATEGORY_TABLE_NAME +
+                " ON " + dbHelper.TABLE_NAME + "." + dbHelper.COLUMN_TO + " = " + dbHelper.CATEGORY_TABLE_NAME + "." + dbHelper.CATEGORY_COLUMN_ID +
+                " WHERE " + dbHelper.CATEGORY_TABLE_NAME + "." + dbHelper.CATEGORY_COLUMN_TYPE + " = 'Дохід'" +
+                " AND " + dbHelper.COLUMN_DATE + " BETWEEN '" + startDate + "' AND '" + endDate + "'" +
+                " GROUP BY " + dbHelper.COLUMN_DATE;
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        Log.d("SQL_QUERY", query);
+
+        float barDistance = 0.15f;
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                String namename = cursor.getString(cursor.getColumnIndex(dbHelper.CATEGORY_COLUMN_TITLE));
+                categoryNames.add(namename);
+            } while (cursor.moveToNext());
+        }
+
+        Calendar calendarStart = Calendar.getInstance();
+        calendarStart.add(Calendar.DAY_OF_MONTH, -6);
+
+        cursor.close();
+        db.close();
+
+        return categoryNames;
+    }
+
+    // Method to set up the bar chart
+    private void setupBarChart(BarChart barChart) {
+        // Customize bar chart as needed
+        barChart.setDrawBarShadow(false);
+        barChart.setDrawValueAboveBar(true);
+        barChart.getDescription().setEnabled(false);
+        barChart.setPinchZoom(false);
+        barChart.setDrawGridBackground(false);
+    }
+
+    // Method to retrieve expenses data for each category
+    private List<BarEntry> getCategoryExpensesDataFromDatabase(List<CategoryData> categoryDataList) {
+        List<BarEntry> categoryEntries = new ArrayList<>();
+
+        for (int i = 0; i < categoryDataList.size(); i++) {
+            // Get category ID
+            int categoryId = categoryDataList.get(i).getId();
+            String categoryTitle = categoryDataList.get(i).getTitle();
+
+            // Get expenses data for the current category
+            double expenses = getExpensesForCategory(categoryId); // Implement this method to fetch expenses for each category
+
+            // Add expenses as a bar entry
+            BarEntry barEntry = new BarEntry(i, (float) expenses);
+            barEntry.setData(categoryTitle);
+            categoryEntries.add(barEntry);
+        }
+
+        return categoryEntries;
+    }
+
 
     private List<BarEntry> getExpensesDataFromDatabase() {
         List<BarEntry> expensesEntries = new ArrayList<>();
@@ -267,6 +403,34 @@ public class StatisticsFragment extends Fragment {
         db.close();
 
         return expensesEntries;
+    }
+
+    private double getExpensesForCategory(int categoryId) {
+        double totalExpenses = 0;
+
+        // Get the start and end dates for the last week
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_MONTH, -6);
+        String startDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(calendar.getTime());
+        String endDate = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Calendar.getInstance().getTime());
+
+        // Construct the SQL query to get expenses for the category for the last week
+        String query = "SELECT SUM(" + dbHelper.COLUMN_AMOUNT + ") AS total_expenses" +
+                " FROM " + dbHelper.TABLE_NAME +
+                " WHERE " + dbHelper.COLUMN_TO + " = " + categoryId +
+                " AND " + dbHelper.COLUMN_DATE + " BETWEEN '" + startDate + "' AND '" + endDate + "'";
+
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            totalExpenses = cursor.getDouble(cursor.getColumnIndex("total_expenses"));
+            cursor.close();
+        }
+
+        db.close();
+
+        return totalExpenses;
     }
 
 
