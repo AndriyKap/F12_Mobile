@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <item name="topDiv" type="id" />
+    <item name="middleDiv" type="id" />
+    <item name="bottomDiv" type="id" />
+    <item name="textBlockHeading" type="id" />
+    <item name="textBlockFinance" type="id" />
+    <item name="textBlockHeading_Copy" type="id" />
+    <item name="short_info_grid" type="id" />
+    <item name="gr_dollar" type="id" />
+    <item name="bl_dollar" type="id" />
+    <item name="r_dollar" type="id" />
+    <item name="v_dollar" type="id" />
+    <item name="balance" type="id" />
+    <item name="income" type="id" />
+    <item name="expenses" type="id" />
+    <item name="savings" type="id" />
+    <item name="balance_label" type="id" />
+    <item name="income_label" type="id" />
+    <item name="expences_label" type="id" />
+    <item name="savings_label" type="id" />
+</resources>

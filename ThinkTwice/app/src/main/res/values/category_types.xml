@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="category_types_array">
+        <item>Дохід</item>
+        <item>Баланс</item>
+        <item>Витрати</item>
+    </string-array>
+</resources>
