@@ -32,9 +32,7 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
         dbHelper = new DatabaseHelper(requireContext());
 
-        int savingsValue = 20;
-        TextView savings = root.findViewById(R.id.savings_percent);
-        savings.setText(savingsValue + "%");
+
         Button openModalTransactionButton = root.findViewById(R.id.open_modal_transaction_button);
         openModalTransactionButton.setOnClickListener(new View.OnClickListener() {
             @Override
