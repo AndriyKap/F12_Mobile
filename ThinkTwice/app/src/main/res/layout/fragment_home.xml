@@ -38,17 +38,6 @@
                 app:cornerRadius="7dp" />
 
             <Button
-                android:id="@+id/set_savings"
-                android:layout_width="142dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:backgroundTint="#000000"
-                android:text="Збереження кошт"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                app:cornerRadius="7dp" />
-
-            <Button
                 android:id="@+id/open_modal_transaction_button"
                 android:layout_width="142dp"
                 android:layout_height="wrap_content"
@@ -59,14 +48,6 @@
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:cornerRadius="7dp" />
-
-            <TextView
-                android:id="@+id/savings_percent"
-                android:layout_width="240dp"
-                android:layout_height="wrap_content"
-                android:text="-%"
-                android:textSize="18sp"
-                android:textStyle="bold" />
 
             <RelativeLayout
                 android:id="@+id/bottomDiv2"
