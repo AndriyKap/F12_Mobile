@@ -56,18 +56,18 @@
                 tools:layout_editor_absoluteX="88dp"
                 tools:layout_editor_absoluteY="191dp" />
 
-<!--            <EditText-->
-<!--                android:id="@+id/category_type"-->
-<!--                android:layout_width="0dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginStart="6dp"-->
-<!--                android:layout_marginEnd="10dp"-->
-<!--                android:layout_weight="1"-->
-<!--                android:ems="10"-->
-<!--                android:hint="Тип"-->
-<!--                android:inputType="text"-->
-<!--                tools:layout_editor_absoluteX="88dp"-->
-<!--                tools:layout_editor_absoluteY="191dp" />-->
+            <!--            <EditText-->
+            <!--                android:id="@+id/category_type"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginStart="6dp"-->
+            <!--                android:layout_marginEnd="10dp"-->
+            <!--                android:layout_weight="1"-->
+            <!--                android:ems="10"-->
+            <!--                android:hint="Тип"-->
+            <!--                android:inputType="text"-->
+            <!--                tools:layout_editor_absoluteX="88dp"-->
+            <!--                tools:layout_editor_absoluteY="191dp" />-->
 
             <Spinner
                 android:id="@+id/category_type_spinner"
@@ -95,7 +95,7 @@
                 android:ems="10"
                 android:hint="Відсоток"
                 android:inputType="number"
-                android:visibility="gone"/>
+                android:visibility="gone" />
         </LinearLayout>
 
         <Button
@@ -108,7 +108,7 @@
             android:layout_marginBottom="6dp"
             android:backgroundTint="@color/black"
             android:padding="12dp"
-            android:text="Додати"
+            android:text="Створити"
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="#FFFFFF"

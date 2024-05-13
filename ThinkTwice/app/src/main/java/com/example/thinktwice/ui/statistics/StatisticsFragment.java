@@ -216,7 +216,7 @@ public class StatisticsFragment extends Fragment {
                 " FROM " + dbHelper.TABLE_NAME +
                 " INNER JOIN " + dbHelper.CATEGORY_TABLE_NAME +
                 " ON " + dbHelper.TABLE_NAME + "." + dbHelper.COLUMN_TO + " = " + dbHelper.CATEGORY_TABLE_NAME + "." + dbHelper.CATEGORY_COLUMN_ID +
-                " WHERE " + dbHelper.CATEGORY_TABLE_NAME + "." + dbHelper.CATEGORY_COLUMN_TYPE + " = 'Дохід'" +
+                " WHERE " + dbHelper.CATEGORY_TABLE_NAME + "." + dbHelper.CATEGORY_COLUMN_TYPE + " = 'Баланс'" +
                 " AND " + dbHelper.COLUMN_DATE + " BETWEEN '" + startDate + "' AND '" + endDate + "'" +
                 " GROUP BY " + dbHelper.COLUMN_DATE;
 
