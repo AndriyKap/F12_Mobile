@@ -78,69 +78,69 @@
                         android:layout_height="wrap_content"
                         android:scrollbars="none">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                    <TableLayout
-                        android:id="@+id/plannedTransactionsTable"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="10dp"
-                        android:divider="@drawable/table_divider"
-                        android:showDividers="middle"
-                        android:stretchColumns="*">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <TableLayout
+                                android:id="@+id/plannedTransactionsTable"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="10dp"
+                                android:divider="@drawable/table_divider"
+                                android:showDividers="middle"
+                                android:stretchColumns="*">
 
-                        <!-- Заголовок таблиці -->
-                        <TableRow>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Джерело"
-                                android:paddingLeft="5dp"
-                                android:paddingRight="5dp"
-                                android:textStyle="bold"
-                                android:gravity="center" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Призначення"
-                                android:paddingLeft="5dp"
-                                android:paddingRight="5dp"
-                                android:textStyle="bold"
-                                android:gravity="center" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Деталі"
-                                android:paddingLeft="5dp"
-                                android:paddingRight="5dp"
-                                android:textStyle="bold"
-                                android:gravity="center" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Дата"
-                                android:paddingLeft="5dp"
-                                android:paddingRight="5dp"
-                                android:textStyle="bold"
-                                android:gravity="center" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Сума"
-                                android:paddingLeft="5dp"
-                                android:paddingRight="5dp"
-                                android:textStyle="bold"
-                                android:gravity="center" />
-                        </TableRow>
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@android:color/darker_gray"
-                            android:layout_margin="4dp" />
-                    </TableLayout>
-                    </LinearLayout>
+                                <!-- Заголовок таблиці -->
+                                <TableRow>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Джерело"
+                                        android:paddingLeft="5dp"
+                                        android:paddingRight="5dp"
+                                        android:textStyle="bold"
+                                        android:gravity="center" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Призначення"
+                                        android:paddingLeft="5dp"
+                                        android:paddingRight="5dp"
+                                        android:textStyle="bold"
+                                        android:gravity="center" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Деталі"
+                                        android:paddingLeft="5dp"
+                                        android:paddingRight="5dp"
+                                        android:textStyle="bold"
+                                        android:gravity="center" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Дата"
+                                        android:paddingLeft="5dp"
+                                        android:paddingRight="5dp"
+                                        android:textStyle="bold"
+                                        android:gravity="center" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Сума"
+                                        android:paddingLeft="5dp"
+                                        android:paddingRight="5dp"
+                                        android:textStyle="bold"
+                                        android:gravity="center" />
+                                </TableRow>
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="@android:color/darker_gray"
+                                    android:layout_margin="4dp" />
+                            </TableLayout>
+                        </LinearLayout>
                     </HorizontalScrollView>
                 </ScrollView>
             </RelativeLayout>
@@ -174,69 +174,69 @@
                         android:layout_height="wrap_content"
                         android:scrollbars="none">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-                    <TableLayout
-                        android:id="@+id/transactionsTable"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="10dp"
-                        android:divider="@drawable/table_divider"
-                        android:showDividers="middle"
-                        android:stretchColumns="*">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+                            <TableLayout
+                                android:id="@+id/transactionsTable"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="10dp"
+                                android:divider="@drawable/table_divider"
+                                android:showDividers="middle"
+                                android:stretchColumns="*">
 
-                        <!-- Заголовок таблиці -->
-                        <TableRow>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Джерело"
-                                android:paddingLeft="5dp"
-                                android:paddingRight="5dp"
-                                android:textStyle="bold"
-                                android:gravity="center" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Призначення"
-                                android:paddingLeft="5dp"
-                                android:paddingRight="5dp"
-                                android:textStyle="bold"
-                                android:gravity="center" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Деталі"
-                                android:paddingLeft="5dp"
-                                android:paddingRight="5dp"
-                                android:textStyle="bold"
-                                android:gravity="center" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Дата"
-                                android:paddingLeft="5dp"
-                                android:paddingRight="5dp"
-                                android:textStyle="bold"
-                                android:gravity="center" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Сума"
-                                android:paddingLeft="5dp"
-                                android:paddingRight="5dp"
-                                android:textStyle="bold"
-                                android:gravity="center" />
-                        </TableRow>
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@android:color/darker_gray"
-                            android:layout_margin="4dp" />
-                    </TableLayout>
-                    </LinearLayout>
+                                <!-- Заголовок таблиці -->
+                                <TableRow>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Джерело"
+                                        android:paddingLeft="5dp"
+                                        android:paddingRight="5dp"
+                                        android:textStyle="bold"
+                                        android:gravity="center" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Призначення"
+                                        android:paddingLeft="5dp"
+                                        android:paddingRight="5dp"
+                                        android:textStyle="bold"
+                                        android:gravity="center" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Деталі"
+                                        android:paddingLeft="5dp"
+                                        android:paddingRight="5dp"
+                                        android:textStyle="bold"
+                                        android:gravity="center" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Дата"
+                                        android:paddingLeft="5dp"
+                                        android:paddingRight="5dp"
+                                        android:textStyle="bold"
+                                        android:gravity="center" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Сума"
+                                        android:paddingLeft="5dp"
+                                        android:paddingRight="5dp"
+                                        android:textStyle="bold"
+                                        android:gravity="center" />
+                                </TableRow>
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1dp"
+                                    android:background="@android:color/darker_gray"
+                                    android:layout_margin="4dp" />
+                            </TableLayout>
+                        </LinearLayout>
                     </HorizontalScrollView>
                 </ScrollView>
             </RelativeLayout>

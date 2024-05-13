@@ -151,5 +151,4 @@ public class HomeFragment extends Fragment {
         textView.setGravity(Gravity.CENTER);
         row.addView(textView);
     }
-
 }
