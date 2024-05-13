@@ -17,8 +17,10 @@ import android.widget.*;
 import com.example.thinktwice.R;
 import com.example.thinktwice.databinding.FragmentHomeBinding;
 import com.example.thinktwice.ui.DatabaseHelper;
+import java.util.Calendar;
 
 import java.io.Console;
+import java.util.Locale;
 
 public class HomeFragment extends Fragment {
     private DatabaseHelper dbHelper;
@@ -96,7 +98,17 @@ public class HomeFragment extends Fragment {
 
     private void displayTransactions() {
         // Отримати всі транзакції
-        Cursor cursor = dbHelper.getAllTransactions();
+        Calendar calendar = Calendar.getInstance();
+        String currentDate = String.format(Locale.getDefault(), "%04d-%02d-%02d",
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH) + 1,
+                calendar.get(Calendar.DAY_OF_MONTH));
+
+        // Скласти SQL-запит для вибору всіх транзакцій, де дата менше або рівна поточній даті
+        String query = "SELECT * FROM " + dbHelper.TABLE_NAME +
+                " WHERE " + dbHelper.COLUMN_DATE + " <= '" + currentDate + "'";
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
         View root = binding.getRoot();
         TableLayout transactionsTable = root.findViewById(R.id.transactionsTable);
         if (cursor != null) {

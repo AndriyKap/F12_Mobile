@@ -107,6 +107,13 @@ public class CreateTransactionDialog extends DialogFragment {
         createTransactionButton = view.findViewById(R.id.create_transaction_button);
         dataTextView = view.findViewById(R.id.date_text_view);
 
+        Calendar calendar = Calendar.getInstance();
+        selectedYear = calendar.get(Calendar.YEAR);
+        selectedMonth = calendar.get(Calendar.MONTH);
+        selectedDay = calendar.get(Calendar.DAY_OF_MONTH);
+
+        dataTextView.setText(String.format(Locale.getDefault(), "%d-%02d-%02d", selectedYear, selectedMonth + 1, selectedDay));
+
         databaseHelper = new DatabaseHelper(getContext());
 
         createTransactionButton.setOnClickListener(new View.OnClickListener() {
