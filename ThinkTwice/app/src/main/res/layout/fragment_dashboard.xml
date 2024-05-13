@@ -38,7 +38,8 @@
                     android:layout_height="wrap_content"
                     android:text="Головна сторінка"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
 
                 <GridLayout
                     android:id="@+id/short_info_grid"
@@ -66,7 +67,8 @@
                         android:layout_columnSpan="1"
                         android:layout_columnWeight="30"
                         android:text=""
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        />
 
                     <ImageView
                         android:id="@+id/bl_dollar"
@@ -134,7 +136,8 @@
                         android:layout_columnWeight="2"
                         android:text="0грн"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
 
                     <TextView
                         android:id="@+id/income"
@@ -147,7 +150,8 @@
                         android:layout_columnWeight="2"
                         android:text="0грн"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
 
                     <TextView
                         android:id="@+id/expenses"
@@ -160,7 +164,8 @@
                         android:layout_columnWeight="2"
                         android:text="0грн"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
 
                     <TextView
                         android:id="@+id/savings"
@@ -173,7 +178,8 @@
                         android:layout_columnWeight="2"
                         android:text="0грн"
                         android:textSize="18sp"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
 
                     <TextView
                         android:id="@+id/balance_label"
@@ -183,7 +189,8 @@
                         android:layout_columnSpan="2"
                         android:layout_columnWeight="1"
                         android:text="Баланс"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:textColor="@color/black"/>
 
                     <TextView
                         android:id="@+id/income_label"
@@ -195,7 +202,8 @@
                         android:layout_columnSpan="2"
                         android:layout_columnWeight="1"
                         android:text="Дохід"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:textColor="@color/black"/>
 
                     <TextView
                         android:id="@+id/expences_label"
@@ -207,7 +215,8 @@
                         android:layout_columnSpan="2"
                         android:layout_columnWeight="1"
                         android:text="Витрати"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:textColor="@color/black"/>
 
                     <TextView
                         android:id="@+id/savings_label"
@@ -219,7 +228,8 @@
                         android:layout_columnSpan="2"
                         android:layout_columnWeight="1"
                         android:text="Збереження"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:textColor="@color/black"/>
 
                 </GridLayout>
 
@@ -243,7 +253,8 @@
                     android:layout_height="wrap_content"
                     android:text="Фінанси"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
@@ -279,7 +290,8 @@
                     android:layout_height="wrap_content"
                     android:text="Транзакції"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
                     <ScrollView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -302,35 +314,40 @@
                                         android:text="Деталі"
                                         android:paddingLeft="5dp"
                                         android:paddingRight="5dp"
-                                        android:textStyle="bold" />
+                                        android:textStyle="bold"
+                                        android:textColor="@color/black"/>
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="Дата"
                                         android:paddingLeft="5dp"
                                         android:paddingRight="5dp"
-                                        android:textStyle="bold" />
+                                        android:textStyle="bold"
+                                        android:textColor="@color/black"/>
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="Сума"
                                         android:paddingLeft="5dp"
                                         android:paddingRight="5dp"
-                                        android:textStyle="bold" />
+                                        android:textStyle="bold"
+                                        android:textColor="@color/black"/>
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="Звідки"
                                         android:paddingLeft="5dp"
                                         android:paddingRight="5dp"
-                                        android:textStyle="bold" />
+                                        android:textStyle="bold"
+                                        android:textColor="@color/black"/>
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="Куди"
                                         android:paddingLeft="5dp"
                                         android:paddingRight="5dp"
-                                        android:textStyle="bold" />
+                                        android:textStyle="bold"
+                                        android:textColor="@color/black"/>
                                 </TableRow>
                                 <View
                                     android:layout_width="match_parent"
